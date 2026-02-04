@@ -60,7 +60,7 @@ function Home() {
 
           <div className="home-container relative z-10 text-center flex flex-col justify-center items-center min-h-screen">
             <h1 className="text-4xl font-bold pt-10">
-              hi beaooootiful, will you be my valentine?
+              hi liangang, will you be my valentine?
             </h1>
 
             <p className="mt-2 text-lg">
