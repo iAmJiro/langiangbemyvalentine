@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Fix: Use a relative path instead of starting with "/src"
-import bearLoveGif from "./assets/bear-love.gif";
+import bearLoveGif from "/src/assets/bear-love.gif";
 
 export default function SecondFunction() {
   const [kartingAccepted, setKartingAccepted] = useState(false);
