@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SecondFunction from "./SecondFunction";
 // 1. Import the GIF as a module so Vite bundles it properly
-import bearLoveGif from "../assets/bear-love.gif"; // Adjust path if needed (e.g. "../assets/bear-love.gif")
+import bearLoveGif from "/src/assets/bear-love.gif"; // Adjust path if needed (e.g. "../assets/bear-love.gif")
 
 export default function CoffeeProposal() {
   const [accepted, setAccepted] = useState(false);
