@@ -1,143 +1,72 @@
 import React, { useState } from "react";
+import SecondFunction from "./SecondFunction";
+// 1. Import the GIF as a module so Vite bundles it properly
+import bearLoveGif from "../assets/bear-love.gif"; // Adjust path if needed (e.g. "../assets/bear-love.gif")
 
-import img1 from "../images/img1.jpg";
-import img2 from "../images/img2.jpg";
-import img3 from "../images/img3.jpg";
-import img4 from "../images/img4.jpg";
-import img5 from "../images/img5.jpg";
-import catGif from "../images/cat.gif";
-import locationImg from "../images/location.png";
-
-function Home() {
-  const [selected, setSelected] = useState("");
-  const [noLeft, setNoLeft] = useState(0);
+export default function CoffeeProposal() {
+  const [accepted, setAccepted] = useState(false);
   const [yesScale, setYesScale] = useState(1);
-  const [showCat, setShowCat] = useState(false);
+  const [noPosition, setNoPosition] = useState({ top: "auto", left: "auto" });
 
-  const images = [img1, img2, img3, img4, img5];
+  if (accepted) {
+    return <SecondFunction />;
+  }
 
-  const positions = [
-    { top: "10%", left: "5%" }, // top-left
-    { top: "10%", left: "70%" }, // top-right
-    { top: "50%", left: "0%" }, // middle-left
-    { top: "50%", left: "80%" }, // middle-right
-    { top: "80%", left: "40%" }, // bottom-center
-  ];
-  const handleClick = (option) => {
-    setSelected(option);
+  const handleNoClick = () => {
+    setYesScale((prev) => prev + 0.15);
 
-    if (option === "no") {
-      setNoLeft((prev) => prev + 50); // instant move
-      setYesScale((prev) => prev + 0.5); // instant grow
-    }
+    const randomTop = Math.random() * (window.innerHeight - 100);
+    const randomLeft = Math.random() * (window.innerWidth - 100);
 
-    if (option === "yes") {
-      setShowCat(true);
-    }
+    setNoPosition({
+      top: `${randomTop}px`,
+      left: `${randomLeft}px`,
+    });
   };
 
   return (
-    <div className="motherdiv relative min-h-screen overflow-hidden bg-pink-400 flex items-center justify-center">
-      {!showCat && (
-        <>
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="valentine"
-              style={{
-                position: "absolute",
-                top: positions[index].top,
-                left: positions[index].left,
-                width: "250px",
-                height: "250px",
-                borderRadius: "20px",
-                zIndex: 1,
-                opacity: 0.85,
-              }}
-            />
-          ))}
-
-          <div className="home-container relative z-10 text-center flex flex-col justify-center items-center min-h-screen">
-            <h1 className="text-4xl font-bold pt-10">
-              hi liangang, will you be my valentine?
-            </h1>
-
-            <p className="mt-2 text-lg">
-              ps: i'd be a really nice date for you!
-            </p>
-
-            <div className="flex gap-6 justify-center mt-10 relative">
-              <button
-                onClick={() => handleClick("yes")}
-                style={{
-                  transform: `scale(${yesScale})`,
-                  padding: "12px 24px",
-                  fontSize: "1.25rem",
-                  backgroundColor: "#fff",
-                  cursor: "pointer",
-                }}
-              >
-                Yes
-              </button>
-
-              <button
-                onClick={() => handleClick("no")}
-                style={{
-                  position: "relative",
-                  left: noLeft + "px",
-                  padding: "12px 24px",
-                  fontSize: "1.25rem",
-                  backgroundColor: "#fff",
-                  cursor: "pointer",
-                }}
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </>
-      )}
-
-      {showCat && (
-        <div className="celebration flex w-full h-full items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-orange-200 text-white font-sans p-4 relative overflow-hidden">
+      {/* Central Container Card */}
+      <div className="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl flex flex-col items-center relative z-10">
+        {/* Bear GIF Container */}
+        <div className="w-32 h-32 my-6 flex items-center justify-center border-2 border-dashed border-white/30 rounded-lg overflow-hidden">
           <img
-            src={catGif}
-            alt="yay cat"
-            style={{
-              width: "300px",
-              height: "300px",
-              marginRight: "50px",
-            }}
+            src={bearLoveGif}
+            alt="Jumping Bear"
+            className="w-full h-full object-cover"
           />
-
-          {/* Wrap text + location image in a vertical column */}
-          <div className="flex flex-col items-center">
-            <h1
-              style={{
-                fontSize: "4rem",
-                fontWeight: "bold",
-                color: "#fff",
-                textAlign: "center",
-              }}
-            >
-              yay ill see you for coffee at this cafe!
-            </h1>
-
-            <img
-              src={locationImg}
-              alt="location"
-              style={{
-                width: "400px",
-                height: "400px",
-                marginTop: "20px",
-              }}
-            />
-          </div>
         </div>
-      )}
+
+        {/* Main Question inside the Card */}
+        <h1 className="text-3xl font-semibold text-center mb-8 leading-tight text-black">
+          Would you like to get coffee with me?
+        </h1>
+
+        {/* Buttons Group inside the Card */}
+        <div className="flex gap-4 items-center justify-center w-full relative h-20">
+          {/* YES BUTTON */}
+          <button
+            onClick={() => setAccepted(true)}
+            style={{ transform: `scale(${yesScale})` }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-full text-lg font-bold transition-all duration-200 shadow-lg active:scale-95 z-20"
+          >
+            YES
+          </button>
+
+          {/* NO BUTTON */}
+          <button
+            onClick={handleNoClick}
+            style={
+              noPosition.top === "auto"
+                ? { position: "static" }
+                : { position: "fixed", ...noPosition }
+            }
+            className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-md font-medium transition-all duration-100 shadow-md active:scale-95 z-30"
+          >
+            No
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
-
-export default Home;
