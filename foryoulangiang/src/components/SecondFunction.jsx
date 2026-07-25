@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-// Placeholder: Replace with a cozy celebrate/happy bear GIF URL
-const CELEBRATE_BEAR_GIF =
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z6Z3B4Z3B4Z3B4/v1.Y2lkPTc5MGI3NjExM3Z6Z3B4/giphy.gif";
+// Fix: Use a relative path instead of starting with "/src"
+import bearLoveGif from "./assets/bear-love.gif";
 
 export default function SecondFunction() {
   const [kartingAccepted, setKartingAccepted] = useState(false);
@@ -29,7 +28,7 @@ export default function SecondFunction() {
         {/* Happy GIF */}
         <div className="w-40 h-40 mb-6 rounded-full overflow-hidden border-4 border-emerald-400 shadow-lg flex items-center justify-center bg-white/20">
           <img
-            src={CELEBRATE_BEAR_GIF}
+            src={bearLoveGif}
             alt="Celebrating Bear"
             className="w-full h-full object-cover"
           />
